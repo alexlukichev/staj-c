@@ -53,7 +53,7 @@ Moving in the token stream:
 - `staj_next(staj_context* context)` - move by one token. The token properties are
   obtained using additional functions. If no errors occured then the result of the
   function is 0. Otherwise the result is -1 and the error number is stored in errno.
-  See [Error Handling](#errh).
+  See [Error Handling](#error-handling).
 
 Getting token values:
 
@@ -65,29 +65,29 @@ Getting token values:
   are stored. The *literal* representation is stored, i.e. how the token
   exactly appears in the input JSON document. In case of success the function
   returns the length of the resulting string in the buffer. Otherwise -1 and sets
-  errno. See [Error Handling](#errh).
+  errno. See [Error Handling](#error-handling).
 - `staj_tostr(staj_context* context, char* buffer, int max_length)` - store the
   decoded (unescaped) value of the string or property name token in the buffer. `max_length`
   is the maximum length in the buffer. In case of success the function returns the length
-  of the resulting string. Otherwise -1 and sets errno. See [Error Handling](#errh).
+  of the resulting string. Otherwise -1 and sets errno. See [Error Handling](#error-handling).
 - `staj_toi(staj_context* context, int* value)` - store the int value  of the
   number token in `value`. In case of success the result is 0, otherwise -1. The error
-  code is in errno. See [Error Handling](#errh).
+  code is in errno. See [Error Handling](#error-handling).
 - `staj_tol(staj_context* context, long int* value)` - store the long int value  of the
   number token in `value`. In case of success the result is 0, otherwise -1. The error
-  code is in errno. See [Error Handling](#errh).
+  code is in errno. See [Error Handling](#error-handling).
 - `staj_tof(staj_context* context, float* value)` - store the float value  of the
   number token in `value`. In case of success the result is 0, otherwise -1. The error
-  code is in errno. See [Error Handling](#errh).
+  code is in errno. See [Error Handling](#error-handling).
 - `staj_tod(staj_context* context, double* value)` - store the double precision float 
   value  of the number token in `value`. In case of success the result is 0, otherwise 
-  -1. The error code is in errno. See [Error Handling](#errh).
+  -1. The error code is in errno. See [Error Handling](#error-handling).
 - `staj_told(staj_context* context, long double* value)` - store the long double precision 
   float value  of the number token in `value`. In case of success the result is 0, 
-  otherwise -1. The error code is in errno. See [Error Handling](#errh).
+  otherwise -1. The error code is in errno. See [Error Handling](#error-handling).
 - `staj_tob(staj_context* context, int* value)` - store the boolean value of the 
   boolean token in `value`. In case of success the result is 0, 
-  otherwise -1. The error code is in errno. See [Error Handling](#errh).
+  otherwise -1. The error code is in errno. See [Error Handling](#error-handling).
 
 Releasing context:
 
@@ -97,6 +97,6 @@ Usually release function is coupled with the context allocation function because
 the structure of the memory buffers may be different for different types of
 input data (e.g. single buffer vs. multiple buffers, etc.)
 
-# <a id="errh"></a>Error Handling
+## Error Handling
 
 
