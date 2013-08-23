@@ -97,6 +97,42 @@ Usually release function is coupled with the context allocation function because
 the structure of the memory buffers may be different for different types of
 input data (e.g. single buffer vs. multiple buffers, etc.)
 
+## Tokens
+
+The following tokens are defined:
+
+- `STAJ_BEGIN_OBJECT` - open curly brace (begin object)
+- `STAJ_BEGIN_ARRAY` - open square bracket (begin array)
+- `STAJ_PROPERTY_NAME` - property name within an object. Property value follows 
+  the property name
+- `STAJ_NUMBER` - number - a possible property value or array item
+- `STAJ_STRING` - string - a possible property value or array item
+- `STAJ_BOOLEAN` - boolean - a possible property value or array item
+- `STAJ_NULL` - null
+- `STAJ_END_OBJECT` - closing curly brace (end object)
+- `STAJ_END_ARRAY` - closing square bracket (end object)
+- `STAJ_EOF` - end of document. Usually before you get `STAJ_EOF` the function 
+  `staj_has_next` returns `false`
+
 ## Error Handling
 
+When error occurs during some function execution it returns with a negative result.
+It also sets errno. The following error codes are defined in `staj.h`:
 
+- `STAJ_EPARSE` - JSON parsing error. See [Parsing Errors](#parsing-errors)
+- `STAJ_ENOMEM` - Not enough memory allocated for internal structures
+- `STAJ_ESTACK` - Context stack is exhausted
+- `STAJ_EINVAL` - Cannot convert token representation into the requested value
+
+## Parsing Errors
+
+If errno is set to `STAJ_EPARSE` then the parsing error just happenned. The code
+of the parsing error can be obtained via a call to 
+`staj_get_parse_error(staj_context* context)`. The following parse error codes
+are possible:
+
+- `STAJ_UNEXPECTED_EOF` - unexpected end of JSON document
+- `STAJ_UNEXPECTED_SYMBOL` - unexpected symbol
+- `STAJ_INVALID_ESCAPE_SEQUENCE` - invalid escape sequence while parsing a string
+- `STAJ_INVALID_UTF8_SEQUENCE` - invalid UTF-8 sequence while parsing a string
+- `STAJ_INVALID_NUMBER_FORMAT` - invalid number format
